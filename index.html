@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portfolio Sara Jamiri</title>
+<meta name="description" content="Sara Jamiri, élève ingénieure en cybersécurité à l'ENSA Marrakech : Cloud, DevSecOps et sécurité Zero Trust.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+/* Layout: one 1040px column; hero with a status panel, a pipeline strip as the signature, then projects as structured entries. */
+:root {
+  --bg: #F2F5F4;
+  --surface: #FFFFFF;
+  --ink: #14211F;
+  --muted: #55625F;
+  --line: #D5DDDA;
+  --accent: #0E6B5B;
+  --accent-soft: #DCEEE9;
+  --signal: #B4570F;
+  --chip: #E9EFED;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1615; --surface: #152120; --ink: #E3ECE9; --muted: #9AABA6;
+    --line: #263533; --accent: #5ECDB4; --accent-soft: #173A33; --signal: #F0A15E; --chip: #1C2B29;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1615; --surface: #152120; --ink: #E3ECE9; --muted: #9AABA6;
+  --line: #263533; --accent: #5ECDB4; --accent-soft: #173A33; --signal: #F0A15E; --chip: #1C2B29;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+.wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h2 { font-size: 1.6rem; font-weight: 700; }
+h3 { font-size: 1.2rem; font-weight: 700; }
+p { margin: 0; }
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+.hero-main { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.hero h1 { font-size: clamp(2.4rem, 6vw, 3.6rem); font-weight: 700; letter-spacing: -0.02em; }
+.role { font-family: var(--display); font-size: clamp(1.15rem, 2.4vw, 1.45rem); font-weight: 500; color: var(--accent); }
+.lead { max-width: 62ch; color: var(--ink); }
+.links { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 14px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--surface);
+  color: var(--ink); text-decoration: none; font-weight: 500; font-size: 0.95rem;
+  font-family: var(--body); cursor: pointer;
+}
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.mail { font-family: var(--mono); font-size: 0.9rem; color: var(--muted); user-select: all; }
+
+.status {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 14px;
+  min-width: 0;
+}
+.status dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 16px; }
+.status dt { font-family: var(--mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding-top: 2px; }
+.status dd { margin: 0; font-weight: 500; }
+.pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 0.8rem;
+  background: var(--accent-soft); color: var(--accent);
+  padding: 4px 10px; border-radius: 999px; width: fit-content;
+}
+.pill::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+
+/* ---------- Pipeline ---------- */
+.pipeline { display: flex; flex-direction: column; gap: 14px; }
+.pipe-box {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 20px; display: flex; flex-direction: column; gap: 14px;
+}
+.steps { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.step {
+  font-family: var(--mono); font-size: 0.88rem;
+  padding: 6px 12px; border-radius: 6px;
+  background: var(--chip); color: var(--ink); border: 1px solid var(--line);
+}
+.step.mine { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); font-weight: 500; }
+.arrow { color: var(--muted); font-family: var(--mono); }
+.pipe-note { color: var(--muted); font-size: 0.92rem; max-width: 70ch; }
+.pipe-note strong { color: var(--accent); font-weight: 600; }
+
+/* ---------- Sections ---------- */
+section { display: flex; flex-direction: column; gap: 20px; }
+.section-head { display: flex; flex-direction: column; gap: 6px; }
+
+/* ---------- Projects ---------- */
+.projects { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--line); }
+.project {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 24px;
+  padding-block: 24px;
+  border-bottom: 1px solid var(--line);
+}
+.p-meta { display: flex; flex-direction: column; gap: 6px; font-family: var(--mono); font-size: 0.82rem; color: var(--muted); }
+.p-meta .tag { color: var(--signal); font-weight: 500; }
+.p-body { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.p-body ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 4px; max-width: 70ch; }
+.p-body li::marker { color: var(--accent); }
+.mine-label { font-weight: 600; color: var(--ink); }
+.stack { display: flex; flex-wrap: wrap; gap: 6px; }
+.stack span {
+  font-family: var(--mono); font-size: 0.78rem;
+  padding: 3px 8px; border-radius: 5px; background: var(--chip); color: var(--muted);
+}
+.figures { display: flex; flex-wrap: wrap; gap: 20px; }
+.figure { display: flex; flex-direction: column; }
+.figure b { font-family: var(--display); font-size: 1.5rem; color: var(--accent); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.figure small { color: var(--muted); font-size: 0.82rem; }
+.p-link { font-weight: 500; font-size: 0.95rem; }
+
+/* ---------- Skills ---------- */
+.skills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.skill {
+  border: 1px solid var(--line); border-radius: 10px; padding: 16px;
+  background: var(--surface); display: flex; flex-direction: column; gap: 10px; min-width: 0;
+}
+.skill h3 { font-size: 1.02rem; }
+.skill ul { margin: 0; padding-left: 1.05em; display: flex; flex-direction: column; gap: 3px; font-size: 0.93rem; }
+.skill li::marker { color: var(--accent); }
+
+/* ---------- Experience & education ---------- */
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; }
+.timeline { display: flex; flex-direction: column; gap: 18px; margin: 0; padding: 0; list-style: none; }
+.timeline li { display: flex; flex-direction: column; gap: 2px; padding-left: 16px; border-left: 2px solid var(--line); }
+.timeline .when { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+.timeline .what { font-weight: 600; }
+.timeline .where { color: var(--muted); font-size: 0.93rem; }
+
+footer {
+  border-top: 1px solid var(--line); padding-top: 20px;
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
+  color: var(--muted); font-size: 0.9rem;
+}
+.toast { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); }
+
+@media (max-width: 760px) {
+  .hero, .two { grid-template-columns: minmax(0, 1fr); }
+  .skills { grid-template-columns: minmax(0, 1fr); }
+  .project { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .p-meta { flex-direction: row; flex-wrap: wrap; gap: 4px 14px; }
+  .wrap { gap: 44px; padding-block: 28px 48px; }
+}
+@media (min-width: 761px) and (max-width: 960px) {
+  .skills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn { transition: border-color .15s ease; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-main">
+      <span class="eyebrow">ENSA Marrakech · Cycle ingénieur · Promotion 2027</span>
+      <h1>Sara Jamiri</h1>
+      <p class="role">Élève ingénieure Cloud, DevSecOps et sécurité Zero Trust</p>
+      <p class="lead">Je conçois et déploie des environnements cloud automatisés et sécurisés : infrastructure as code sur AWS, pipelines CI/CD avec contrôles de sécurité, gestion des accès selon le moindre privilège. Je suis aussi développeuse, du backend à l'interface, avec le réflexe sécurité apporté par ma formation en cyberdéfense.</p>
+      <div class="links">
+        <a class="btn primary" href="https://github.com/sarajmr-yet" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://linkedin.com/in/sara-jamiri" target="_blank" rel="noopener">LinkedIn</a>
+        <button class="btn" id="copy-mail" type="button">Copier l'e-mail</button>
+        <span class="mail" id="mail">jamirisara@gmail.com</span>
+        <span class="toast" id="toast" aria-live="polite"></span>
+      </div>
+    </div>
+
+    <aside class="status" aria-label="Disponibilité">
+      <span class="pill">Recherche un PFE 2027</span>
+      <dl>
+        <dt>Domaines</dt><dd>Cloud, DevSecOps, sécurité des accès</dd>
+        <dt>Filière</dt><dd>Cyberdéfense et Systèmes de Télécommunications Embarqués</dd>
+        <dt>Basée à</dt><dd>Marrakech, mobile au Maroc</dd>
+        <dt>Langues</dt><dd>Arabe, français, anglais</dd>
+      </dl>
+    </aside>
+  </header>
+
+  <section class="pipeline" aria-labelledby="pipe-title">
+    <div class="section-head">
+      <span class="eyebrow">Comment je travaille</span>
+      <h2 id="pipe-title">Zéro configuration manuelle</h2>
+    </div>
+    <div class="pipe-box">
+      <div class="steps" role="list" aria-label="Pipeline de déploiement du projet SOC as Code">
+        <span class="step" role="listitem">terraform validate</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="step" role="listitem">tfsec</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="step" role="listitem">checkov</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="step" role="listitem">terraform plan</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="step" role="listitem">terraform apply</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="step mine" role="listitem">ansible : détection &amp; alertes</span>
+      </div>
+      <p class="pipe-note">Le pipeline GitHub Actions de notre projet SOC as Code : l'infrastructure AWS est entièrement provisionnée par Terraform, contrôlée par tfsec et checkov avant chaque déploiement. <strong>Ma partie</strong> s'exécute à la fin : la configuration automatisée de la détection et des alertes avec Ansible.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="proj-title">
+    <div class="section-head">
+      <span class="eyebrow">Projets</span>
+      <h2 id="proj-title">Cloud, sécurité et développement</h2>
+    </div>
+
+    <div class="projects">
+
+      <article class="project">
+        <div class="p-meta"><span class="tag">Cloud &amp; sécurité</span><span>2026</span><span>Équipe de 5</span></div>
+        <div class="p-body">
+          <h3>SOC as Code : architecture de sécurité AWS multi-comptes</h3>
+          <p>Une plateforme de détection et de réponse aux attaques, entièrement en infrastructure as code, sur deux comptes AWS isolés : un environnement exposé où des attaques réelles sont simulées, et un environnement de défense micro-segmenté.</p>
+          <div class="figures">
+            <div class="figure"><b>2</b><small>comptes AWS isolés</small></div>
+            <div class="figure"><b>6</b><small>techniques ATT&amp;CK simulées</small></div>
+            <div class="figure"><b>0</b><small>configuration manuelle</small></div>
+          </div>
+          <ul>
+            <li><span class="mine-label">Ma partie (SIEM &amp; pipeline d'alertes) :</span> un rôle Ansible qui configure Kibana de bout en bout, intégré au pipeline Terraform de l'équipe.</li>
+            <li>Règles de détection sur les journaux CloudTrail et les notices réseau Zeek : arrêt ou suppression de la journalisation (T1562.008), reverse shell (T1059).</li>
+            <li>Transfert automatique des alertes vers TheHive toutes les 5 minutes : 10 événements AWS suspects associés à leur technique MITRE ATT&amp;CK, sans doublon.</li>
+            <li>Clé API et adresses externalisées : aucun secret dans le code publié.</li>
+          </ul>
+          <div class="stack"><span>AWS CloudTrail · S3 · IAM</span><span>Terraform</span><span>Ansible</span><span>GitHub Actions</span><span>Kibana</span><span>Elasticsearch</span><span>Zeek</span><span>TheHive</span><span>Python</span></div>
+          <a class="p-link" href="https://github.com/sarajmr-yet/soc-as-code-siem" target="_blank" rel="noopener">Voir ma partie sur GitHub</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="p-meta"><span class="tag">Stage · NetDev</span><span>Été 2026</span><span>2 mois</span></div>
+        <div class="p-body">
+          <h3>SecureCopilot : outil DevSecOps assisté par IA</h3>
+          <p>Un outil qui détecte les vulnérabilités du code Python au moment où il est écrit, et les explique grâce à un modèle de langage exécuté en local : aucune ligne de code ne quitte la machine.</p>
+          <ul>
+            <li>Extension VS Code en TypeScript et backend FastAPI, avec analyse statique Semgrep et règles OWASP.</li>
+            <li>Contrôle d'accès par rôles (JWT, profils Admin et Développeur), tableau de bord React et base PostgreSQL.</li>
+            <li>Tests automatisés avec pytest.</li>
+          </ul>
+          <div class="stack"><span>FastAPI</span><span>TypeScript</span><span>React</span><span>PostgreSQL</span><span>Semgrep</span><span>Ollama</span><span>JWT / RBAC</span></div>
+          <a class="p-link" href="https://github.com/sarajmr-yet/SecureCopilot" target="_blank" rel="noopener">Voir le code sur GitHub</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="p-meta"><span class="tag">CI/CD · open source</span><span>2026</span><span>Équipe de 4</span></div>
+        <div class="p-body">
+          <h3>SecurityRegTest et SecTest : générateur de tests de régression de sécurité</h3>
+          <p>Un outil qui détecte les vulnérabilités et génère automatiquement les tests qui empêchent une faille corrigée de réapparaître. Le projet existe en deux versions.</p>
+          <ul>
+            <li><span class="mine-label">SecurityRegTest</span> (Python, ligne de commande) : 10 catégories de vulnérabilités CWE, tests pytest générés et <em>security gate</em> GitHub Actions qui bloque le déploiement. Présenté dans un article scientifique.</li>
+            <li><span class="mine-label">SecTest</span> (application web Spring Boot) : 46 règles CWE sur Java, Python et JavaScript, analyse d'APK Android avec apktool, tests JUnit générés, rapport PDF et explications par un LLM local (Ollama).</li>
+          </ul>
+          <div class="stack"><span>Python</span><span>pytest</span><span>GitHub Actions</span><span>Java / Spring Boot</span><span>apktool</span><span>Ollama</span><span>CWE</span></div>
+          <a class="p-link" href="https://github.com/sarajmr-yet/sectest-generator" target="_blank" rel="noopener">Voir SecTest sur GitHub</a>
+          <a class="p-link" href="https://github.com/hiba05555/security-regression-tool" target="_blank" rel="noopener">Voir SecurityRegTest sur GitHub</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="p-meta"><span class="tag">Réseau</span><span>2025</span><span>Équipe de 5</span></div>
+        <div class="p-body">
+          <h3>VPN site-à-site IPsec entre deux pare-feu de marques différentes</h3>
+          <p>Interconnexion chiffrée de deux sites équipés de pare-feu différents, Sophos XG et OPNsense, pour valider leur interopérabilité. Le réseau est simulé dans GNS3, avec un routeur jouant le rôle d'Internet et un poste Kali sur chaque site pour les tests.</p>
+          <ul>
+            <li>Tunnel IPsec IKEv2 : chiffrement ESP AES-256 / SHA-256, groupe Diffie-Hellman 14, authentification par clé pré-partagée.</li>
+            <li>Plan d'adressage sans chevauchement entre les deux LAN, trafic inter-sites sans NAT.</li>
+          </ul>
+          <div class="stack"><span>IPsec IKEv2</span><span>Sophos XG</span><span>OPNsense</span><span>GNS3</span><span>Kali Linux</span></div>
+          <a class="p-link" href="https://github.com/sarajmr-yet/vpn-site-to-site-ipsec" target="_blank" rel="noopener">Voir le projet et le rapport sur GitHub</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="p-meta"><span class="tag">IA · PFS</span><span>Juillet 2026</span><span>Équipe de 2</span></div>
+        <div class="p-body">
+          <h3>Atlas Oliva : comptage d'oliviers par vision par ordinateur</h3>
+          <p>Détection et comptage d'oliviers sur images aériennes, du jeu de données jusqu'à l'API.</p>
+          <div class="figures">
+            <div class="figure"><b>95,4 %</b><small>mAP@0.5 (YOLOv8s)</small></div>
+            <div class="figure"><b>5</b><small>modèles comparés</small></div>
+            <div class="figure"><b>~741</b><small>images aériennes</small></div>
+          </div>
+          <ul>
+            <li>Responsable de l'IA et du backend : entraînement des modèles YOLO, inférence par tuiles pour les grandes images, API FastAPI.</li>
+            <li>Sécurité validée selon l'OWASP ASVS : JWT révocables, contrôle d'accès par rôles, journal d'audit, mots de passe hachés (PBKDF2).</li>
+            <li>Méthode et résultats présentés dans un article scientifique rédigé avec nos encadrants.</li>
+          </ul>
+          <div class="stack"><span>YOLOv8</span><span>Python</span><span>FastAPI</span><span>Leaflet</span><span>JWT / RBAC</span></div>
+          <a class="p-link" href="https://github.com/sarajmr-yet/atlas-oliva" target="_blank" rel="noopener">Voir le projet et l'article sur GitHub</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="p-meta"><span class="tag">En production</span><span>2026</span><span>Projet personnel</span></div>
+        <div class="p-body">
+          <h3>Jamiri Travel : site d'agence de voyages</h3>
+          <p>Un site de réservation de circuits au Maroc en quatre langues, avec paiement en ligne, que j'ai mis en production et que je maintiens seule : hébergement, nom de domaine et e-mails.</p>
+          <div class="stack"><span>PHP</span><span>MySQL</span><span>PayPal SDK</span><span>PHPMailer</span></div>
+          <a class="p-link" href="https://jamiritravel.com" target="_blank" rel="noopener">Voir le site en ligne</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section aria-labelledby="skills-title">
+    <div class="section-head">
+      <span class="eyebrow">Compétences</span>
+      <h2 id="skills-title">Ce que j'apporte à une équipe</h2>
+    </div>
+    <div class="skills">
+      <div class="skill">
+        <h3>Cloud &amp; IaC</h3>
+        <ul><li>AWS : EC2, S3, IAM, CloudTrail</li><li>Terraform (en équipe), Ansible</li><li>GitHub Actions, Docker</li><li>Linux</li></ul>
+      </div>
+      <div class="skill">
+        <h3>Accès &amp; secrets</h3>
+        <ul><li>Rôles IAM cross-account, RBAC</li><li>Authentification JWT, bcrypt</li><li>Chiffrement AES-256 des secrets</li></ul>
+      </div>
+      <div class="skill">
+        <h3>Réseau &amp; supervision</h3>
+        <ul><li>VPN IPSec et OpenVPN</li><li>TCP/IP, Wireshark</li><li>SIEM ELK, MITRE ATT&amp;CK</li></ul>
+      </div>
+      <div class="skill">
+        <h3>Offensif &amp; gouvernance</h3>
+        <ul><li>Nmap, Burp Suite, Kali Linux</li><li>CTF : EliteSec 2025 (NullHat Morocco)</li><li>ISO 27001, ISO 27004, NIST CSF, OWASP</li></ul>
+      </div>
+      <div class="skill">
+        <h3>Développement</h3>
+        <ul><li>Python, Java, TypeScript</li><li>FastAPI, Spring Boot, React</li><li>PostgreSQL, MySQL</li></ul>
+      </div>
+      <div class="skill">
+        <h3>IA</h3>
+        <ul><li>LLM en local (Ollama)</li><li>Vision : modèles YOLO</li><li>Machine learning (scikit-learn)</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="path-title">
+    <div class="section-head">
+      <span class="eyebrow">Parcours</span>
+      <h2 id="path-title">Expérience et formation</h2>
+    </div>
+    <div class="two">
+      <ol class="timeline" aria-label="Expérience">
+        <li><span class="when">Été 2026 · 2 mois</span><span class="what">Stagiaire PFA, NetDev</span><span class="where">SecureCopilot, outil DevSecOps assisté par IA</span></li>
+        <li><span class="when">2025 · 1 mois</span><span class="what">Stagiaire PFA, Red City Tours, Marrakech</span><span class="where">Développement et sécurisation d'une plateforme de réservation</span></li>
+      </ol>
+      <ol class="timeline" aria-label="Formation">
+        <li><span class="when">2024 – 2027</span><span class="what">Cycle ingénieur, ENSA Marrakech</span><span class="where">Filière Cyberdéfense et Systèmes de Télécommunications Embarqués (GCDSTE), Université Cadi Ayyad</span></li>
+        <li><span class="when">2022 – 2024</span><span class="what">Cycle préparatoire, ENSA Marrakech</span><span class="where">Classes préparatoires intégrées</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    <span>Sara Jamiri · jamirisara@gmail.com</span>
+    <span><a href="https://github.com/sarajmr-yet" target="_blank" rel="noopener">github.com/sarajmr-yet</a> · <a href="https://linkedin.com/in/sara-jamiri" target="_blank" rel="noopener">linkedin.com/in/sara-jamiri</a></span>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var btn = document.getElementById('copy-mail');
+  var mail = document.getElementById('mail');
+  var toast = document.getElementById('toast');
+  function selectMail() {
+    var range = document.createRange();
+    range.selectNodeContents(mail);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+  btn.addEventListener('click', function () {
+    var text = mail.textContent.trim();
+    var done = function () { toast.textContent = 'Copié'; setTimeout(function () { toast.textContent = ''; }, 2000); };
+    var fallback = function () { selectMail(); toast.textContent = 'Sélectionné : Ctrl+C pour copier'; };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else { fallback(); }
+    } catch (e) { fallback(); }
+  });
+})();
+</script>
+</body>
+</html>
